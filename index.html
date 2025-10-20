@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -488,6 +488,58 @@
             color: var(--accent-color);
             font-weight: 500;
         }
+
+        /* Стили для улучшенной навигации */
+        .nav-icon {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        /* Ховер эффекты для новой навигации */
+        nav ul li:not(.active) a:hover {
+            background: rgba(255, 153, 0, 0.1) !important;
+            border-color: rgba(255, 153, 0, 0.4) !important;
+            color: #ff9900 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.2) !important;
+        }
+
+        nav ul li:not(.active) a:hover .nav-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Анимация пульсации для активного элемента */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+                transform: scale(0.95);
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(255, 153, 0, 0);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+                transform: scale(0.95);
+            }
+        }
+
+        /* Анимация волны */
+        @keyframes waveAnimation {
+            0% {
+                d: path("M0,5 Q25,0 50,5 T100,5");
+            }
+            50% {
+                d: path("M0,5 Q25,10 50,5 T100,5");
+            }
+            100% {
+                d: path("M0,5 Q25,0 50,5 T100,5");
+            }
+        }
+
+        .wave-path {
+            animation: waveAnimation 3s ease-in-out infinite;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
@@ -498,20 +550,46 @@
     <div class="wrapper">
         <header class="container">
             <div class="main-nav">
-<a class="logo" style="position: relative; display: inline-block;">
-    MixerCheck
-    <span style="position: absolute; top: 0px; right: -25px; background: linear-gradient(45deg, #ff9900, #ffcc00); color: #000; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 8px; transform: rotate(12deg); box-shadow: 0 2px 6px rgba(255,153,0,0.4); border: 1px solid #ffcc00; z-index: 10; text-transform: uppercase; opacity: 0.9;">
-        BETA
-    </span>
-</a>
+                <a class="logo" style="position: relative; display: inline-block;">
+                    MixerCheck
+                    <span style="position: absolute; top: 0px; right: -25px; background: linear-gradient(45deg, #ff9900, #ffcc00); color: #000; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 8px; transform: rotate(12deg); box-shadow: 0 2px 6px rgba(255,153,0,0.4); border: 1px solid #ffcc00; z-index: 10; text-transform: uppercase; opacity: 0.9;">
+                        BETA
+                    </span>
+                </a>
                 
                 <button class="menu-toggle" onclick="toggleMenu()">☰</button>
                 
                 <nav id="main-menu">
-                    <ul>
-                        <li class="active"><a href="index.html">Everything</a></li>
-                        <li><a href="Sy.html">System Informer</a></li>
-                        <li><a href="Ps.html">Powershell</a></li>
+                    <ul style="list-style: none; display: flex; gap: 8px; margin: 0; padding: 0;">
+                        <li class="active" style="position: relative;">
+                            <a href="index.html" 
+                               style="color: #ff9900; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: 1px solid rgba(255, 153, 0, 0.5); display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, rgba(255, 153, 0, 0.15), rgba(255, 204, 0, 0.1)); box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3); position: relative;">
+                                <span class="nav-icon" style="font-size: 1.1em;">🔍</span>
+                                Everything
+                                <!-- Анимированная волнистая полоса (5 вариант) -->
+                                <div style="position: absolute; bottom: -2px; left: 0; width: 100%; height: 6px; overflow: hidden;">
+                                    <svg viewBox="0 0 100 10" style="width: 100%; height: 100%;">
+                                        <path class="wave-path" d="M0,5 Q25,0 50,5 T100,5" stroke="#ff9900" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <span style="position: absolute; top: 8px; right: 8px; width: 6px; height: 6px; background: #ff9900; border-radius: 50%; animation: pulse 2s infinite;"></span>
+                            </a>
+                        </li>
+                        <li style="position: relative;">
+                            <a href="Sy.html" 
+                               style="color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 10px; background: rgba(30, 30, 30, 0.8); transition: all 0.3s ease;">
+                                <span class="nav-icon" style="font-size: 1.1em;">⚙️</span>
+                                System Informer
+                            </a>
+                        </li>
+                        <li style="position: relative;">
+                            <a href="Ps.html" 
+                               style="color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 10px; background: rgba(30, 30, 30, 0.8); transition: all 0.3s ease;">
+                                <span class="nav-icon" style="font-size: 1.1em;">💻</span>
+                                Powershell
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </header> 
@@ -521,15 +599,14 @@
         <h1></h1>
         
         <div class="panel">
-            <h3 class="panel-title">Поиск клиентов Minecraft</h3>
+            <h3 class="panel-title">Поиск запрещенных клиентов «Minecraft» </h3>
             <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
             <div class="panel-content">ext:.exe;.jar regex:(impact|wurst|bleach[-_]?hack|aristois|huzuni|skill[-_]?client|nodus|inertia|ares|sigma|meteor|atomic|zamorozka|liquid[-_]?bounce|nurik|nursultan|wisefolder|celestial|calestial|celka|expensive|neverhook|excellent|wexside|wild|minced|deadcode|akrien|jigsaw|future|jessica|dreampool|vape|infinity|squad|no[-_]?rules|konas|zeus[-_]?client|rich[-_]?client|ghost[-_]?client|rusher[-_]?hack|thunder[-_]?hack|moon[-_]?hack|winner|nova|exire|doomsday|nightware|ricardo|extazyy|troxill|arbuz|dauntiblyat|rename[-_]?me[-_]?please|edit[-_]?me|takker|faker|xameleon|fuze[-_]?client|wise[-_]?folder|net[-_]?limiter|feather|delta|eclipse|venus|jex|hakari|hush|hach|rogalik|catlavan|haruka|wissend|fluger|sperma|vortex|newcode|astra|britva|bariton|bot|player|freecam|bedrock|hotbar|swap|chest|gumball|tweak|entity|crystal|optimizer|viabackwards|viaforge|viaproxy|hitbox|elytra|xaero|through|mob|auto|place|health|inventory|x[-_]?ray|clean[-_]?cut|smart[-_]?moving|save[-_]?searcher|world[-_]?downloader|trade[-_]?finder|chorus[-_]?find|inv[-_]?move|chunk[-_]?copy|seed[-_]?cracker|diamond[-_]?sim|forge[-_]?hax|step[-_]?up|client[-_]?commands|camera[-_]?utils|cheat[-_]?utils|universal[-_]?mod|swing[-_]?through[-_]?grass)
 </div>
         </div>
         
         <div class="panel">
-            <h3 class="panel-title">Поиск запрещенных конфигурационных файлов
-</h3>
+            <h3 class="panel-title">Поиск запрещенных конфигурационных файлов</h3>
             <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
             <div class="panel-content">ext:.txt;.json;.toml;.yml;.cfg;.properties;.ini | folder: dm:last60days regex:(shellbag|bariton|bot|player|freecam|bedrock|hotbar|swap|chest|gumball|tweak|entity|crystal|optimizer|viabackwards|viaforge|viaproxy|hitbox|elytra|xaero|through|mob|auto|place|health|inventory|x[-_]?ray|clean[-_]?cut|smart[-_]?moving|save[-_]?searcher|world[-_]?downloader|trade[-_]?finder|chorus[-_]?find|inv[-_]?move|chunk[-_]?copy|seed[-_]?cracker|diamond[-_]?sim|forge[-_]?hax|step[-_]?up|client[-_]?commands|camera[-_]?utils|cheat[-_]?utils|universal[-_]?mod|swing[-_]?through[-_]?grass)
 
@@ -537,42 +614,36 @@
         </div>
         
         <div class="panel">
-            <h3 class="panel-title">Поиск vec.dll | MP3 файлов</h3>
+            <h3 class="panel-title">Поиск vec.dll | MP3 чит-файлов 
+</h3>
             <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
             <div class="panel-content">size:30720 utf8content:net/minecraft/util/math/axisalignedbb | size:9400174</div>
         </div>
         
-<div class="panel">
-    <h3 class="panel-title">Поиск запрещенного ПО
+        <div class="panel">
+            <h3 class="panel-title">Поиск запрещенного ПО
 </h3>
-    <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
-    <div class="panel-content">*.exe size:1566208 | size:22285824 | size:1010176 | size:22433280 | size:348672 | size:352256 | size:782848 | size:6887424 | size:763392 | size:6111 | size:743424 | size:1767424 | size:823808 | size:18126848 | &lt;size:700kb..5mb utf8content:net/minecraftforge/fml/loading/FMLLoader | glowEsp&gt; | &lt;size:14mb..17mb utf8content:D3D11CreateDeviceAndSwapChain|LoadLibraryA&gt;
+            <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
+            <div class="panel-content">*.exe size:1566208 | size:22285824 | size:1010176 | size:22433280 | size:348672 | size:352256 | size:782848 | size:6887424 | size:763392 | size:6111 | size:743424 | size:1767424 | size:823808 | size:18126848 | &lt;size:700kb..5mb utf8content:net/minecraftforge/fml/loading/FMLLoader | glowEsp&gt; | &lt;size:14mb..17mb utf8content:D3D11CreateDeviceAndSwapChain|LoadLibraryA&gt;
 </div>
-</div>
+        </div>
         
         <div class="panel">
-            <h3 class="panel-title">Поиск клиента «DoomsDay» [Способ 1]
-</h3>
+            <h3 class="panel-title">Поиск клиента «DoomsDay» [Способ 1]</h3>
             <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
             <div class="panel-content">*.jar size:21kb-10mb utf8content:net/java/s.class utf8content:net/java/f.class </div>
         </div>
-    </div>
-</div>
-        </div>
         
         <div class="panel">
-            <h3 class="panel-title">Поиск клиента «DoomsDay» [Способ 2]
-</h3>
+            <h3 class="panel-title">Поиск клиента «DoomsDay» [Способ 2]</h3>
             <button class="copy-btn" data-label="⎘" onclick="copyPanelContent(this)">Копировать</button>
-            <div class="panel-content">size:21kb-10mb utf8content:net/java/s.class utf8content:net/java/f.class </div>
+            <div class="panel-content">.size:21kb-10mb utf8content:net/java/s.class utf8content:net/java/f.class </div>
         </div>
     </div>
 
-<footer>
-    Mixergrief &copy; 2025 | <a href="https://vk.com/jodkasf" style="color: inherit; text-decoration: none;">Разработчик: zuazuga (Кликабельно)</a> 
-
-</footer>
-
+    <footer>
+        Mixergrief &copy; 2025 | <a href="https://vk.com/jodkasf" style="color: inherit; text-decoration: none;">Разработчик: zuazuga (Кликабельно)</a> 
+    </footer>
 
     <!-- Подключаем библиотеку particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -712,6 +783,3 @@
     </script>
 </body>
 </html>
-
-
-
